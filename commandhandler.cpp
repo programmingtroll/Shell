@@ -35,6 +35,7 @@ void commandHandler::sendcommand(QString linea)
     match = reg.match(linea.trimmed());
     if (match.hasMatch()) {
         genericList = linea.split(" ",QString::SkipEmptyParts);
+        arguments->clear();
         arguments->append(Location->path());
         if (genericList.size()>1) {
             for (int i = 1; i < genericList.size(); ++i) {
@@ -58,7 +59,7 @@ void commandHandler::sendcommand(QString linea)
         //path = "C:\\Users\\OWNER\\Documents\\Qt_creations\\build-Console-Desktop_Qt_5_2_1_MinGW_32bit-Release\\release\\rm.exe";
         qDebug()<<"Este es el path: "+path;
         for (int var = 0; var < arguments->size(); ++var) {
-            qDebug()<<"Estos son los argumentos: "+arguments->at(var);
+            qDebug()<<"Estos son los argumentos: "+QString::number(var)+" "+arguments->at(var);
         }
         if (type != -1) {
             programOrFile = new QString(path);
