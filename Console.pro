@@ -13,8 +13,12 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    keyreturnevent.cpp \
+    commandhandler.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    keyreturnevent.h \
+    commandhandler.h
 
 FORMS    += mainwindow.ui
