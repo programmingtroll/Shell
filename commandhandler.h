@@ -11,6 +11,7 @@
 #include <QStringList>
 #include <QDebug>
 #include <QList>
+#include <QSysInfo>
 #include "keyreturnevent.h"
 #include "capsuleprg.h"
 
@@ -25,6 +26,7 @@ class commandHandler:public QObject
      QRegularExpression reg;
      QRegularExpressionMatch match;
      QStringList genericList;
+     QSysInfo thisPlatform;
      QDir *Location;
      QDir *myDir;
      KeyReturnEvent *Parent;

@@ -41,10 +41,16 @@ void commandHandler::sendcommand(QString linea)
         for (int i = 0; i < genericList.size(); ++i) {
             genericList.replace(i,genericList.at(i).trimmed());
             firstSpace = genericList.at(i).indexOf(" ");
-            prgWithArgs.append(new capsulePrg(genericList.at(i).left(firstSpace),
-                                               genericList.at(i).mid(firstSpace)) );
-            //qDebug()<< genericList.at(i).left(firstSpace);
-            //qDebug()<< genericList.at(i).mid(firstSpace);
+            if (firstSpace == -1) {
+                prgWithArgs.append(new capsulePrg(genericList.at(i)));
+                prgWithArgs.at(i)->insertParam(0,Location->path());
+            }else{
+                prgWithArgs.append(new capsulePrg(genericList.at(i).left(firstSpace),
+                                                  genericList.at(i).mid(firstSpace)) );
+                prgWithArgs.at(i)->insertParam(0,Location->path());
+//                qDebug()<< genericList.at(i).left(firstSpace);
+//                qDebug()<< genericList.at(i).mid(firstSpace);
+            }
         }
         bool doPipes = true;
         int command = 0;
@@ -59,9 +65,6 @@ void commandHandler::sendcommand(QString linea)
         if (doPipes) {
             //Limpieza de la lista de procesos si es necesario.
             if (processes.size()>0) {
-                for (int i = 0; i < processes.size(); ++i) {
-                    processes.at(i)->~QProcess();
-                }
                 processes.clear();
             }
 
@@ -122,6 +125,9 @@ inline QString commandHandler::verifier(QString program)
     program = "/"+program;
     QString path = "";
     QFile fileOrCmd(myDir->path()+program);
+    if (thisPlatform.productType() == "windows") {
+        fileOrCmd.setFileName(fileOrCmd.fileName()+".exe");
+    }
     if (fileOrCmd.exists()) {
         path = myDir->path()+ program;
     }else{

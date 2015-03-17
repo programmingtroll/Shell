@@ -9,6 +9,7 @@ class capsulePrg
    QString programPath;
    QStringList params;
 public:
+    capsulePrg(QString);
     capsulePrg(QString, QStringList);
     capsulePrg(QString, QString);
     ~capsulePrg();
@@ -18,6 +19,7 @@ public:
     void setParams(const QStringList &value);
     QString getName() const;
     void setName(const QString &value);
+    void insertParam(int,QString);
 };
 
 #endif // CAPSULEPRG_H

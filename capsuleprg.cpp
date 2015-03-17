@@ -10,6 +10,18 @@ void capsulePrg::setName(const QString &value)
 {
     name = value;
 }
+
+void capsulePrg::insertParam(int pos, QString param)
+{
+    params.insert(pos,param);
+}
+
+capsulePrg::capsulePrg(QString name)
+{
+    this->name = name;
+    this->programPath = "";
+}
+
 capsulePrg::capsulePrg(QString name, QStringList params)
 {
     this->name = name;
