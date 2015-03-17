@@ -10,27 +10,34 @@
 #include <QString>
 #include <QStringList>
 #include <QDebug>
+#include <QList>
 #include "keyreturnevent.h"
+#include "capsuleprg.h"
 
 class commandHandler:public QObject
 {
      Q_OBJECT
-     QDir *Location;
      QString system;
      QSysInfo localSystem;
      QString cdPattern;
      QString cmdOFilePat;
+     QString pipesPattern;
      QRegularExpression reg;
      QRegularExpressionMatch match;
      QStringList genericList;
+     QDir *Location;
      QDir *myDir;
      KeyReturnEvent *Parent;
      QProcess *myProcess;
      QString *programOrFile;
      QStringList *arguments;
+     QList <capsulePrg*> prgWithArgs;
+     QList <QProcess*> processes;
 public:
     commandHandler(KeyReturnEvent* Parent, QDir *myDir,QDir *Location);
     void sendcommand(QString linea);
+    inline QString verifier(QString program);
+    void streamRedirection(QProcess*);
 
 };
 

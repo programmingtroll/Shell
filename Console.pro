@@ -15,10 +15,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     keyreturnevent.cpp \
-    commandhandler.cpp
+    commandhandler.cpp \
+    capsuleprg.cpp
 
 HEADERS  += mainwindow.h \
     keyreturnevent.h \
-    commandhandler.h
+    commandhandler.h \
+    capsuleprg.h
 
 FORMS    += mainwindow.ui
