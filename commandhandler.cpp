@@ -112,6 +112,7 @@ void commandHandler::sendcommand(QString linea)
             programOrFile = new QString(path);
             myProcess= new QProcess(Parent);
             Parent->setMyProcess(myProcess);
+            Parent->prompt("simpleline");
             streamRedirection(myProcess);
             myProcess->start(*programOrFile,*arguments);
         }else{

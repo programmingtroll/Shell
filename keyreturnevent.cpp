@@ -69,21 +69,25 @@ void KeyReturnEvent::prompt()
 
 void KeyReturnEvent::prompt(QString value)
 {
-    ParentUI->textEdit->append(value);
-    ParentUI->textEdit->append("Command:$"+ Location->path()+"> ");
+    if (value == "simpleline") {
+         ParentUI->textEdit->insertPlainText("\n");
+    }else{
+        ParentUI->textEdit->append(value);
+        ParentUI->textEdit->append("Command:$"+ Location->path()+"> ");
+    }
     lastPos = cursor.position();
 }
 
 
 void KeyReturnEvent::processOutput()
 { 
-    ParentUI->textEdit->append(myProcess->readAllStandardOutput());  // read normal output
+    ParentUI->textEdit->insertPlainText(myProcess->readAllStandardOutput());  // read normal output
     lastPos = cursor.position();
 }
 
 void KeyReturnEvent::processOutputError()
 {
-    ParentUI->textEdit->append(myProcess->readAllStandardError());  // read error channel
+    ParentUI->textEdit->insertPlainText(myProcess->readAllStandardError());  // read error channel
     lastPos = cursor.position();
 }
 
